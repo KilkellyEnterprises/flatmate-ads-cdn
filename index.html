@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Flatmate Flow ads</title>
+<style>
+  :root { --orange:#FF6B35; --cream:#FDF8F3; --brown:#2D1F0E; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--cream); color:var(--brown);
+         font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+         padding:env(safe-area-inset-top) 16px env(safe-area-inset-bottom); }
+  header { text-align:center; padding:22px 0 10px; }
+  header h1 { margin:0; font-size:24px; font-weight:900; letter-spacing:-.5px; }
+  header p { margin:6px 0 0; opacity:.7; font-size:14px; }
+  .grid { max-width:520px; margin:0 auto; display:flex; flex-direction:column; gap:24px; padding-bottom:40px; }
+  .card { background:#fff; border-radius:18px; overflow:hidden; box-shadow:0 6px 24px rgba(45,31,14,.10); }
+  .card video { width:100%; display:block; background:#000; aspect-ratio:9/16; object-fit:cover; }
+  .meta { padding:14px 16px 16px; }
+  .meta h2 { margin:0 0 4px; font-size:17px; font-weight:800; }
+  .tag { display:inline-block; font-size:12px; font-weight:700; padding:3px 10px; border-radius:999px; }
+  .posted { background:#E7F6E9; color:#1c7a32; }
+  .draft  { background:#FFEFE8; color:var(--orange); }
+  .meta p { margin:8px 0 0; font-size:13px; line-height:1.45; opacity:.85; white-space:pre-wrap; }
+  footer { text-align:center; opacity:.5; font-size:12px; padding:8px 0 28px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Flatmate Flow — ad reels</h1>
+  <p>Tap to play. Sound on 🔊</p>
+</header>
+<div class="grid" id="grid"></div>
+<footer>Private review page · @flatmate_flow</footer>
+<script>
+  const BASE = "https://cdn.jsdelivr.net/gh/KilkellyEnterprises/flatmate-ads-cdn@master/";
+  const ads = [
+    { file:"milk-thief_vo.mp4", title:"Milk thief", status:"posted", note:"“Who finished the milk? We all know who.” — 12.0s" },
+    { file:"bin-night_vo.mp4", title:"Bin night", status:"posted", note:"“Nobody remembers whose turn it was.” — 15.3s" },
+    { file:"day08_chore-wheel_vo.mp4", title:"Chore wheel (day 8)", status:"draft", note:"“Whose turn is it? Never again. The app just assigns it.” — 10.1s · not posted yet" },
+  ];
+  const grid = document.getElementById("grid");
+  for (const a of ads) {
+    const c = document.createElement("div"); c.className = "card";
+    c.innerHTML = `
+      <video controls playsinline preload="metadata" poster="" src="${BASE}${a.file}#t=0.1"></video>
+      <div class="meta">
+        <h2>${a.title} <span class="tag ${a.status}">${a.status === "posted" ? "✓ posted" : "draft"}</span></h2>
+        <p>${a.note}</p>
+      </div>`;
+    grid.appendChild(c);
+  }
+</script>
+</body>
+</html>
